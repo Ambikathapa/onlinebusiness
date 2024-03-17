@@ -1,0 +1,179 @@
+{% load i18n %}
+{% load static %}
+{% load cart_template_tags %}
+{% load category_template_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block head_title %}{% trans "Sign Out" %}{% endblock %}</title>
+    <style>
+      .header1 {
+        background-color: #333; /* Navbar background color */
+        color: white; /* Text color */
+        padding: 10px 0; /* Add padding */
+      }
+      
+      .container-menu-header {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+      }
+      
+      .topbar-social {
+        display: flex;
+      }
+      
+      .topbar-social-item {
+        margin-right: 10px;
+        color: white;
+        text-decoration: none;
+      }
+      
+      .topbar-child1 {
+        text-align: center;
+        flex-grow: 1; /* Take up remaining space */
+        margin: 0 20px; /* Add margin */
+      }
+      
+      .topbar-child2 {
+        text-align: right;
+      }
+      
+      .wrap_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+      }
+      
+      .logo {
+        display: flex;
+        align-items: center;
+        color: white;
+      }
+      
+      .logo-icon {
+        font-size: 1.5rem;
+        margin-right: 5px;
+      }
+      
+      .logo-text {
+        text-decoration: none;
+      }
+      
+      .wrap_menu {
+        flex-grow: 1;
+        text-align: center;
+      }
+      
+      .main_menu {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .main_menu li {
+        margin-right: 35px;
+      }
+      
+      .main_menu li:last-child {
+        margin:  0px;
+      }
+      
+      .main_menu a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+      }
+      
+      .main_menu a:hover {
+        color: #ddd; /* Hover color */
+      }
+      
+      .container {
+        margin-top: 50px;
+        text-align: center;
+      }
+      
+      
+    </style>
+</head>
+
+<body>
+  <header class="header1">
+    <div class="container-menu-header">
+      <div class="topbar">
+        <div class="topbar-social">
+          <a href="#" class="topbar-social-item fab fa-facebook"></a>
+          <a href="#" class="topbar-social-item fab fa-instagram"></a>
+          <a href="#" class="topbar-social-item fab fa-pinterest-p"></a>
+          <a href="#" class="topbar-social-item fab fa-twitter"></a>
+          <a href="#" class="topbar-social-item fab fa-youtube"></a>
+        </div>
+        <span class="topbar-child1">Free shipping for standard order over $100</span>
+        <div class="topbar-child2">
+          <span class="topbar-email">
+            <a href="https://github.com/Ambikathapa/Blogpost">shopallonline@gmail.com</a>
+          </span>
+        </div>
+      </div>
+      <div class="wrap_header">
+        <div class="topbar-social"> <!-- Updated this line -->
+          <a href="#" class="topbar-social-item fab fa-facebook"></a>
+          <a href="#" class="topbar-social-item fab fa-instagram"></a>
+          <a href="#" class="topbar-social-item fab fa-pinterest-p"></a>
+          <a href="#" class="topbar-social-item fab fa-twitter"></a>
+          <a href="#" class="topbar-social-item fab fa-youtube"></a>
+        </div>
+        <div class="logo"> <!-- Moved the logo inside wrap_header -->
+          <span class="logo-icon fab fa-shopware"></span> <!-- Assume this is the logo icon -->
+          <span class="logo-text"><b>S</b>hop All-online</span>
+        </div>
+        <div class="wrap_menu">
+          <nav class="menu">
+            <ul class="main_menu">
+              <li><a href="/">Home</a></li>
+              <li><a href="/shop/">Shop</a></li>
+              <li><a href="{% url 'account_logout' %}">Logout</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mt-5 offset-3">
+        <h1>{% trans "Sign Out" %}</h1>
+        <p>{% trans 'Are you sure you want to sign out?' %}</p>
+        <form method="post" action="{% url 'account_logout' %}">
+          {% csrf_token %}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <button type="submit" class="btn btn-primary">{% trans 'Sign Out' %}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <!-- Footer content here -->
+  </footer>
+</body>
+
+</html>
