@@ -28,9 +28,9 @@ Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS
 
 # Installation
 
-`git clone https://github.com/zinmyoswe/Django-Ecommerce.git`
+`git clone https://github.com/Ambikathapa/onlinebusiness.git
 
-`cd Django-Ecommerce`
+`cd ADVANCECOMMERCE
 
 `pip install virtualenv`
 
@@ -72,11 +72,4 @@ python manage.py createsuperuser
 Username : admin
 Password : 12345678
 ```
-# Demo
-
-http://djangoecommerce.pythonanywhere.com
-
-# HTML Template
-
-https://colorlib.com/etc/fashe/index.html
 
