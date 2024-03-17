@@ -69,7 +69,7 @@ pip install Pillow
 
 ```python
 python manage.py createsuperuser
-Username : admin
-Password : 12345678
+Username : ambik
+Password :ambik
 ```
 
