@@ -1,3 +1,4 @@
+
 from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
@@ -13,11 +14,18 @@ from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon, Ref
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 
+
+from django.http import JsonResponse
+from .models import Category
+
 # Create your views here.
 import random
 import string
 import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+
 
 
 def create_ref_code():
@@ -193,6 +201,8 @@ class CheckoutView(View):
                     return redirect('core:payment', payment_option='stripe')
                 elif payment_option == 'P':
                     return redirect('core:payment', payment_option='paypal')
+                elif payment_option == 'E':
+                    return redirect('core:payment', payment_option='esewa')
                 else:
                     messages.warning(
                         self.request, "Invalid payment option selected")
@@ -402,3 +412,10 @@ class RequestRefundView(View):
 def sign_out(request):
                  # Your sign out logic here
                 return render(request, 'logout.html')
+
+
+def search_products(request):
+    search_term = request.GET.get('search', '')
+    products = Category.objects.filter(title__icontains=search_term)
+    data = [{'title': product.title, 'price': product.price} for product in products]
+    return JsonResponse(data, safe=False)

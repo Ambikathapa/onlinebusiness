@@ -21,7 +21,7 @@
 </style>
 
 	<!-- Title Page -->
-	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(/static/images/heading-pages-02.jpg)	;">
+	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(/static/images/Screenshot 2024-03-19 194635.png)	;">
 		<h2 class="l-text2 t-center">
 			Shop
 		</h2>
@@ -124,30 +124,55 @@
 							</ul>
 						</div>
 
-						<div class="search-product pos-relative bo4 of-hidden">
-    <input id="search-input" class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
-    <button id="search-button" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-        <i class="fs-12 fa fa-search" aria-hidden="true"></i>
-    </button>
-</div>
+				<!-- Your HTML code for the search bar -->
+            <div class="search-product pos-relative bo4 of-hidden">
+                <input id="search-input" class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+                <button id="search-button" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+                    <i class="fs-12 fa fa-search" aria-hidden="true"></i>
+                </button>
+            </div>
 
-<script>
-    document.getElementById('search-button').addEventListener('click', function() {
+<!-- Your other HTML content -->
+
+<!-- Include the script for the search functionality -->
+       <script>
+		function searchProducts() {
+			var searchTerm = document.getElementById('search-input').value;
+		
+			fetch('/search-products/?search=' + encodeURIComponent(searchTerm))
+				.then(response => response.json())
+				.then(products => {
+					// Update the UI with the fetched products
+					console.log('Search term:', searchTerm);
+					console.log('Products:', products);
+		
+					// Display the search results
+					var resultsContainer = document.getElementById('search-results');
+					resultsContainer.innerHTML = ''; // Clear previous results
+		
+					products.forEach(product => {
+						var productDiv = document.createElement('div');
+						productDiv.textContent = product.title; // Example: Display product title
+						resultsContainer.appendChild(productDiv);
+					});
+				})
+				.catch(error => {
+					console.error('Error fetching products:', error);
+				});
+		}
+		
+
+        document.getElementById('search-button').addEventListener('click', function() {
         searchProducts();
-    });
+         });
 
-    document.getElementById('search-input').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
+        document.getElementById('search-input').addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
             searchProducts();
-        }
-    });
+          }
+        });
+        </script>
 
-    function searchProducts() {
-        var searchTerm = document.getElementById('search-input').value;
-        // Perform the search functionality here, e.g., fetch products based on the searchTerm
-        console.log('Search term:', searchTerm);
-    }
-</script>
 
 					</div>
 				</div>
