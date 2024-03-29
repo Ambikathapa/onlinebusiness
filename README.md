@@ -70,6 +70,10 @@ pip install Pillow
 ```python
 python manage.py createsuperuser
 Username : ambik
+<<<<<<< HEAD
 Password : ambik
+=======
+Password :ambik
+>>>>>>> origin/master
 ```
 
